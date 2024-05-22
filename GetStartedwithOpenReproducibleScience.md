@@ -250,6 +250,7 @@ Python has no ‘hey what was that thingy I typed yesterday?’ function).
 
 
 ```python
+# Getting data from NCEI for Rapid City, CO
 rapidcityurl = (
     'https://www.ncei.noaa.gov/access/services/data/v1?'
     'dataset=daily-summaries'
@@ -552,6 +553,7 @@ below and find out if your answer is correct.
 
 
 ```python
+# Checking column names to know all columns in data
 rapidcity_df.columns
 ```
 
@@ -566,6 +568,7 @@ rapidcity_df.columns
 
 
 ```python
+# Rewriting data frame to only have precipitations and TOBS data
 rapidcity_df = rapidcity_df[['PRCP', 'TOBS']]
 rapidcity_df
 ```
@@ -690,6 +693,7 @@ Plotting in Python is easy, but not quite this easy:
 
 
 ```python
+# Plotting Rapid City PRCP and TOBS 
 rapidcity_df.plot()
 ```
 
@@ -740,7 +744,7 @@ your plot to look.
 
 
 ```python
-# Plot the data using .plot
+# Plotting Daily Observed Temperature for Rapid City from 1944-2024
 rapidcity_df.plot(
     y='TOBS',
     title='Rapid City Daily Observed Temperature 1944-2024',
@@ -804,7 +808,7 @@ rapidcity_df.loc[:,'TCel'] = (rapidcity_df['TOBS'] - 32) * 5 / 9
 rapidcity_df
 ```
 
-    /tmp/ipykernel_935/1789627478.py:2: SettingWithCopyWarning: 
+    /tmp/ipykernel_6497/1789627478.py:2: SettingWithCopyWarning: 
     A value is trying to be set on a copy of a slice from a DataFrame.
     Try using .loc[row_indexer,col_indexer] = value instead
     
@@ -960,16 +964,14 @@ print('You earned {} of 5 points for converting to Celcius'.format(points))
 def to_celsius(fahrenheit):
     """Convert temperature to Celsius"""
     return (fahrenheit - 32) * 5 / 9
-# Put your equation in here
- 
 
-#rapidcity_df['celcius_column'] = rapidcity_df['fahrenheit_column'].apply(convert)
+# Displaying dataframe with new column, celsius
 rapidcity_df['celsius'] = rapidcity_df['TOBS'].apply(to_celsius)
 rapidcity_df
 
 ```
 
-    /tmp/ipykernel_935/3455352028.py:9: SettingWithCopyWarning: 
+    /tmp/ipykernel_6497/2859914288.py:7: SettingWithCopyWarning: 
     A value is trying to be set on a copy of a slice from a DataFrame.
     Try using .loc[row_indexer,col_indexer] = value instead
     
@@ -1660,7 +1662,7 @@ print('You earned {} of 5 points for resampling'.format(points))
 
 
 ```python
-# Plot mean annual temperature values
+# Plot mean annual temperature values from 1983 to 2023
 rapidyearly.plot(
     y='TOBS',
     title='Rapid City Annual Mean Temperatures 1983-2023',
@@ -1832,6 +1834,7 @@ rainier_df
 
 
 ```python
+# Keeping only precipitation and TOBS columns
 rainier_df = rainier_df[['PRCP', 'TOBS']]
 rainier_df
 ```
@@ -1931,7 +1934,7 @@ rainier_df
 
 
 ```python
-# Plot the data using .plot
+# Plotting Rainier Daily Observed Temperature
 rainier_df.plot(
     y='TOBS',
     title='Rainier Paradise Ranger Station City Daily Observed Temperature 1916-2024',
@@ -2192,6 +2195,7 @@ rainiersubset
 
 
 ```python
+# Resampling to get only mean yearly values 
 rainieryearly = rainiersubset.resample('YE').mean()
 rainieryearly
 ```
@@ -2501,7 +2505,7 @@ rainieryearly
 
 
 ```python
-# Plot mean annual temperature values for Rainier
+# Plot mean annual temperature values for Rainier from 1980 to 2023
 rainieryearly.plot(
     y='TOBS',
     title='Rainier Paradise Ranger Station Annual Mean Temperatures 1980-2023',
@@ -2527,9 +2531,29 @@ rainieryearly.plot(
     
 
 
+## **Temperatures on the rise in Mount Rainier, WA over the last 40 years! ** 📰 🗞️ 📻
+
+*Over the last 40 years, Mount Rainier has experienced many drastic changes in temperature. Today we can see that both the extreme lows and extreme highs are increasing.*
+
+<figure>
+<img
+src="https://pics.craiyon.com/2023-07-12/1d858937f1104df68803a2994c90453a.webp"
+alt="Writing bear" />
+<figcaption aria-hidden="true">Writing bear</figcaption>
+</figure>
+
+> Image credit: https://www.craiyon.com/image/OAbZtyelSoS7FdGko6hvQg
+
 
 ```python
 %%capture
 %%bash
 jupyter nbconvert *.ipynb --to markdown
+```
+
+
+```python
+%%capture
+%%bash
+jupyter nbconvert *.ipynb --to html
 ```
